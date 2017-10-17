@@ -8,27 +8,27 @@ def to_string(s):
     try:
         return str(s)
     except:
-        #Change the encoding type if needed
+        # Change the encoding type if needed
         return s.encode('utf-8')
-    
-    
+
+
 def reduce_item(key, value):
     global reduced_item
-    
-    #Reduction Condition 1
-    if type(value) is list:
-        i=0
-        for sub_item in value:
-            reduce_item(key+'_'+to_string(i), sub_item)
-            i=i+1
 
-    #Reduction Condition 2
+    # Reduction Condition 1
+    if type(value) is list:
+        i = 0
+        for sub_item in value:
+            reduce_item(key + '_' + to_string(i), sub_item)
+            i = i + 1
+
+    # Reduction Condition 2
     elif type(value) is dict:
         sub_keys = value.keys()
         for sub_key in sub_keys:
-            reduce_item(key+'_'+to_string(sub_key), value[sub_key])
-    
-    #Base Condition
+            reduce_item(key + '_' + to_string(sub_key), value[sub_key])
+
+    # Base Condition
     else:
         reduced_item[to_string(key)] = to_string(value)
 
@@ -36,7 +36,6 @@ def reduce_item(key, value):
 url = 'https://data.dublinked.ie/cgi-bin/rtpi/routeinformation?routeid=1&operator=BE&format=json'
 
 
-        
 response = requests.get(url)
 
 data = response.json()
