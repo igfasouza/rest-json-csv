@@ -26,21 +26,21 @@ def reduce_item(key, value):
     elif type(value) is dict:
         sub_keys = value.keys()
         for sub_key in sub_keys:
-            reduce_item(key + '_' + to_string(sub_key), value[sub_key])
+            if(key!=''):
+              key = key + '_'
+            reduce_item(key + to_string(sub_key), value[sub_key])
 
     # Base Condition
     else:
         reduced_item[to_string(key)] = to_string(value)
 
 
-url = 'https://data.dublinked.ie/cgi-bin/rtpi/routeinformation?routeid=1&operator=BE&format=json'
+url = 'https://api.thedogapi.com/v1/breeds'
 
 
 response = requests.get(url)
 
 data = response.json()
-data = [data]
-
 
 processed_data = []
 header = []
